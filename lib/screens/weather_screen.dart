@@ -109,7 +109,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 10),
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
@@ -121,10 +120,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       },
                       icon: const Icon(Icons.refresh),
                       label: const Text("Recommencer"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                      ),
                     ),
                     const SizedBox(height: 20),
                   ],

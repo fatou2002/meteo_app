@@ -9,15 +9,15 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double lat = city["coord"]["lat"].toDouble();
-    final double lon = city["coord"]["lon"].toDouble();
-    final coords = LatLng(lat, lon);
+    final coords = LatLng(
+      city["coord"]["lat"].toDouble(),
+      city["coord"]["lon"].toDouble(),
+    );
 
     return Scaffold(
       appBar: AppBar(title: Text("Détails : ${city["name"]}")),
       body: Column(
         children: [
-          const SizedBox(height: 10),
           Text(
             "Météo actuelle à ${city["name"]}",
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -38,7 +38,8 @@ class DetailScreen extends StatelessWidget {
               children: [
                 TileLayer(
                   urlTemplate:
-                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+                  subdomains: ['a', 'b', 'c'],
                   userAgentPackageName: 'com.example.meteo_app',
                 ),
                 MarkerLayer(

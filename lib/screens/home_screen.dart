@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (_) => const LoadingScreen()),
                 );
               },
-              child: const Text("Commencer"),
+              child: const Text("Commencer 🚀"),
             )
           ],
         ),
