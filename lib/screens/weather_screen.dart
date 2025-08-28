@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../services/weather_service.dart';
-import '../providers/theme_provider.dart';
 import 'detail_screen.dart';
-import 'home_screen.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -30,9 +27,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       List<Map<String, dynamic>> results = [];
       for (var city in cities) {
         final data = await _service.fetchWeather(city);
-        if (data != null) {
-          results.add(data);
-        }
+        if (data != null) results.add(data);
       }
       setState(() {
         weatherData = results;
@@ -49,25 +44,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Données météo"),
-        actions: [
-          Consumer<ThemeProvider>(
-            builder: (context, themeProvider, child) {
-              final isDark = themeProvider.themeMode == ThemeMode.dark;
-              return IconButton(
-                icon: Icon(
-                  isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                  color: isDark ? Colors.yellow : Colors.orange,
-                ),
-                onPressed: () {
-                  themeProvider.toggleTheme(!isDark);
-                },
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text("Tableau météo")),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : errorMessage != null
@@ -85,44 +62,41 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ],
                   ),
                 )
-              : Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: weatherData.length,
-                        itemBuilder: (context, index) {
-                          final city = weatherData[index];
-                          return ListTile(
-                            title: Text(city["name"]),
-                            subtitle: Text(
-                                "${city["main"]["temp"]}°C - ${city["weather"][0]["description"]}"),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => DetailScreen(city: city),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
-                          (route) => false,
-                        );
-                      },
-                      icon: const Icon(Icons.refresh),
-                      label: const Text("Recommencer"),
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    headingRowColor: MaterialStateProperty.all(Colors.blue[100]),
+                    columns: const [
+                      DataColumn(label: Text("Ville")),
+                      DataColumn(label: Text("Température 🌡")),
+                      DataColumn(label: Text("Humidité 💧")),
+                      DataColumn(label: Text("Ciel ☁️")),
+                      DataColumn(label: Text("Actions")),
+                    ],
+                    rows: weatherData.map((city) {
+                      return DataRow(
+                        cells: [
+                          DataCell(Text(city["name"])),
+                          DataCell(Text("${city["main"]["temp"]}°C")),
+                          DataCell(Text("${city["main"]["humidity"]}%")),
+                          DataCell(Text("${city["weather"][0]["description"]}")),
+                          DataCell(
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => DetailScreen(city: city),
+                                  ),
+                                );
+                              },
+                              child: const Text("Détails"),
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
                 ),
     );
   }
