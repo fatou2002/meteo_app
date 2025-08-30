@@ -46,9 +46,9 @@ class DetailScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // --- Carte OSM ---
+            
             SizedBox(
-              height: 300, // hauteur fixe
+              height: 300, 
               child: FlutterMap(
                 options: MapOptions(
                   initialCenter: coords,
@@ -81,7 +81,7 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  // Widget carré météo
+  
   Widget _buildInfoCard(
       IconData icon, String title, String value, Color color) {
     return Card(

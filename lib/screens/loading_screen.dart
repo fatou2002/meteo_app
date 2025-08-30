@@ -31,13 +31,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void _startLoading() {
     progress = 0;
     showRestart = false;
+
     timer = Timer.periodic(const Duration(milliseconds: 200), (t) {
       setState(() {
         progress += 0.05;
+
         if (progress >= 1) {
           t.cancel();
           showRestart = true;
         }
+
         currentMessage = (currentMessage + 1) % messages.length;
       });
     });
@@ -70,7 +73,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         );
                       });
                     },
-                    child: const Text("Recommencer 🔄"),
+                    child: const Text("Recommencer 🔄"), // ✅ corrigé
                   )
                 : CircularPercentIndicator(
                     radius: 80,

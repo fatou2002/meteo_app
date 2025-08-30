@@ -38,17 +38,24 @@ class HomeScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
                 ),
                 onPressed: () {
+                  // ✅ Démarre sur LoadingScreen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const LoadingScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => const LoadingScreen(),
+                    ),
                   );
                 },
-                child: const Text("Commencer 🚀",
-                    style: TextStyle(fontSize: 18)),
+                child: const Text(
+                  "Commencer 🚀",
+                  style: TextStyle(fontSize: 18),
+                ),
               )
             ],
           ),

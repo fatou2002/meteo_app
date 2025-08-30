@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'providers/theme_provider.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
-      child: const MeteoApp(),
-    ),
-  );
+  runApp(const MeteoApp());
 }
 
 class MeteoApp extends StatelessWidget {
@@ -17,15 +10,11 @@ class MeteoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
     return MaterialApp(
-      title: 'Météo App',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      themeMode: themeProvider.themeMode,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      title: "App Météo",
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const HomeScreen(), // ✅ On démarre par Home
     );
   }
 }
