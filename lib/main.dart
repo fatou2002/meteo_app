@@ -14,7 +14,7 @@ class MeteoApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "App Météo",
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(), // ✅ On démarre par Home
+      home: const HomeScreen(), 
     );
   }
 }

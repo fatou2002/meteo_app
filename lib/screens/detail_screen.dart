@@ -19,7 +19,7 @@ class DetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // --- Grille d'infos météo en petits carrés ---
+           
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.count(

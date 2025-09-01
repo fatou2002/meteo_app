@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // ✅ Démarre sur LoadingScreen
+                 
                   Navigator.push(
                     context,
                     MaterialPageRoute(

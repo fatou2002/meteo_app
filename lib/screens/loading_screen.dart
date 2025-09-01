@@ -64,7 +64,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 ? ElevatedButton(
                     onPressed: () {
                       _startLoading();
-                      // Après redémarrage, naviguer vers tableau météo
+                     
                       Future.delayed(const Duration(seconds: 1), () {
                         Navigator.pushReplacement(
                           context,
@@ -73,7 +73,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         );
                       });
                     },
-                    child: const Text("Recommencer 🔄"), // ✅ corrigé
+                    child: const Text("Recommencer 🔄"), 
                   )
                 : CircularPercentIndicator(
                     radius: 80,
