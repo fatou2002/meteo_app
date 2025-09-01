@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class WeatherService {
   final Dio _dio = Dio();
-  final String apiKey = "27727a3450e7b7561db3768d0dad651d"; // << Mets ta clé OpenWeather ici
+  final String apiKey = "27727a3450e7b7561db3768d0dad651d"; 
 
   Future<Map<String, dynamic>?> fetchWeather(String city) async {
     final url =
